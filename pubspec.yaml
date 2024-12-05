@@ -36,6 +36,22 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
+  # -------------------------- state management --------------------------
+  get: ^4.6.6
+
+  # -------------------------- ui --------------------------
+  intl: ^0.20.1
+  flutter_svg: ^2.0.16
+  shimmer: ^3.0.0
+  oktoast: ^3.4.0
+
+  # -------------------------- Local storage --------------------------
+  shared_preferences: ^2.3.3
+  cached_network_image: ^3.4.1
+
+  #_______________________ http _______________________
+  http: ^1.2.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -59,9 +75,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/icons/
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -74,12 +90,27 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: PublicSans
+      fonts:
+        - asset: assets/fonts/public_sans/public_sans_thin.otf
+          weight: 100
+        - asset: assets/fonts/public_sans/public_sans_extra_bold.otf
+          weight: 200
+        - asset: assets/fonts/public_sans/public_sans_light.otf
+          weight: 300
+        - asset: assets/fonts/public_sans/public_sans_regular.otf
+          weight: 400
+        - asset: assets/fonts/public_sans/public_sans_medium.otf
+          weight: 500
+        - asset: assets/fonts/public_sans/public_sans_semi_bold.otf
+          weight: 600
+        - asset: assets/fonts/public_sans/public_sans_bold.otf
+          weight: 700
+        - asset: assets/fonts/public_sans/public_sans_extra_bold.otf
+          weight: 800
+        - asset: assets/fonts/public_sans/public_sans_black.otf
+          weight: 900
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
