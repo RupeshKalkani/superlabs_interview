@@ -16,15 +16,26 @@ class SearchProductController extends GetxController {
 
   @override
   void onInit() {
-    getSearchData(resetData: true);
+    getSearchData(
+      resetData: true,
+      fromOnInit: true,
+    );
     scrollController.addListener(() {
+      onScrollPositionChange();
+    });
+    super.onInit();
+  }
+
+  void onScrollPositionChange() {
+    try {
       bool flag = backToTopBtnVisible;
       backToTopBtnVisible = (scrollController.position.pixels > 300.ww);
       if (flag != backToTopBtnVisible) {
         update(['loader']);
       }
-    });
-    super.onInit();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   void onClearQueryTap() {
@@ -53,10 +64,16 @@ class SearchProductController extends GetxController {
     }
   }
 
-  Future<void> getSearchData({bool resetData = false}) async {
+  Future<void> getSearchData({
+    bool resetData = false,
+    bool fromOnInit = false,
+  }) async {
     try {
       if (resetData) {
         loader = true;
+        if (!fromOnInit) {
+          onBackToTopTap();
+        }
         searchProductRes = searchProductRes?.copyWith(
           data: searchProductRes?.data?.copyWith(
             products: [],
@@ -175,11 +192,16 @@ class SearchProductController extends GetxController {
   }
 
   void onBackToTopTap() {
-    scrollController.animateTo(
-      0,
-      duration: 200.milliseconds,
-      curve: Curves.linear,
-    );
+    try {
+      backToTopBtnVisible = false;
+      scrollController.animateTo(
+        0,
+        duration: 200.milliseconds,
+        curve: Curves.linear,
+      );
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   void onFavoriteBtnTap(int index) {
