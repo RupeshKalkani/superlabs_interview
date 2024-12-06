@@ -59,7 +59,7 @@ void hideKeyboard({BuildContext? context}) {
   }
 }
 
-String getPriceString(double? amount,{int fixedDecimal = 2}) {
+String getPriceString(double? amount, {int fixedDecimal = 2}) {
   if (amount == null) return "";
   try {
     final intData = int.tryParse(amount.toString().split(".").last);

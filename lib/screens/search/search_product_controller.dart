@@ -4,16 +4,26 @@ import 'package:superlabs_interview/superlabs_interview.dart';
 
 class SearchProductController extends GetxController {
   bool loader = false;
+  bool paginationLoader = false;
   final TextEditingController searchFieldController = TextEditingController();
   FilterState filterState = FilterState();
   int currentPage = 1;
   bool isApiCalling = false;
   Timer? timer;
   SearchProductRes? searchProductRes;
+  bool backToTopBtnVisible = false;
+  final ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
     getSearchData(resetData: true);
+    scrollController.addListener(() {
+      bool flag = backToTopBtnVisible;
+      backToTopBtnVisible = (scrollController.position.pixels > 300.ww);
+      if (flag != backToTopBtnVisible) {
+        update(['loader']);
+      }
+    });
     super.onInit();
   }
 
@@ -55,6 +65,9 @@ class SearchProductController extends GetxController {
         update(['loader']);
         currentPage = 1;
         isApiCalling = false;
+      } else {
+        paginationLoader = true;
+        update(['loader']);
       }
       if (isApiCalling) return;
       isApiCalling = true;
@@ -88,6 +101,7 @@ class SearchProductController extends GetxController {
     }
     isApiCalling = false;
     loader = false;
+    paginationLoader = false;
     update(['loader']);
   }
 
@@ -122,7 +136,7 @@ class SearchProductController extends GetxController {
       ));
     } else {
       for (var model in list) {
-        if(model.code == attribute.code){
+        if (model.code == attribute.code) {
           if (model.values?.contains(searchValue) ?? false) {
             model.values?.remove(searchValue);
           } else {
@@ -158,5 +172,27 @@ class SearchProductController extends GetxController {
   void onClearAllTap() {
     filterState = FilterState();
     getSearchData(resetData: true);
+  }
+
+  void onBackToTopTap() {
+    scrollController.animateTo(
+      0,
+      duration: 200.milliseconds,
+      curve: Curves.linear,
+    );
+  }
+
+  void onFavoriteBtnTap(int index) {
+    final List<Product> updatedList =
+        List.from(searchProductRes?.data?.products ?? []);
+    updatedList[index] = updatedList[index].copyWith(
+      isFavorite: !updatedList[index].isFavorite,
+    );
+    searchProductRes = searchProductRes?.copyWith(
+      data: searchProductRes?.data?.copyWith(
+        products: updatedList,
+      ),
+    );
+    update(['loader']);
   }
 }

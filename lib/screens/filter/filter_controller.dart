@@ -127,7 +127,7 @@ class FilterController extends GetxController {
       ));
     } else {
       for (var model in list) {
-        if(model.code == attribute.code){
+        if (model.code == attribute.code) {
           if (model.values?.contains(searchValue) ?? false) {
             model.values?.remove(searchValue);
           } else {

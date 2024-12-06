@@ -22,8 +22,8 @@ class RatingBar extends StatefulWidget {
     this.size = 32,
   })  : _readOnly = false,
         assert(
-        !isHalfAllowed || halfFilledIcon != null,
-        'Please provide halfFilledIcon if isHalfAllowed is true.',
+          !isHalfAllowed || halfFilledIcon != null,
+          'Please provide halfFilledIcon if isHalfAllowed is true.',
         );
 
   /// Creates read only rating bar.
@@ -46,8 +46,8 @@ class RatingBar extends StatefulWidget {
   })  : _readOnly = true,
         onRatingChanged = null,
         assert(
-        !isHalfAllowed || halfFilledIcon != null,
-        'Please provide halfFilledIcon if isHalfAllowed is true.',
+          !isHalfAllowed || halfFilledIcon != null,
+          'Please provide halfFilledIcon if isHalfAllowed is true.',
         ),
         super(key: key);
 
@@ -114,17 +114,17 @@ class _RatingBarState extends State<RatingBar> {
   Widget build(BuildContext context) => _buildRatingBar();
 
   Widget _buildRatingBar() => Align(
-    alignment: widget.alignment,
-    child: _buildDirectionWrapper(
-      List.generate(
-        widget.maxRating,
+        alignment: widget.alignment,
+        child: _buildDirectionWrapper(
+          List.generate(
+            widget.maxRating,
             (index) {
-          final iconPosition = index + 1;
-          return _buildIcon(iconPosition);
-        },
-      ),
-    ),
-  );
+              final iconPosition = index + 1;
+              return _buildIcon(iconPosition);
+            },
+          ),
+        ),
+      );
 
   Widget _buildDirectionWrapper(List<Widget> children) {
     if (widget.direction == Axis.vertical) {

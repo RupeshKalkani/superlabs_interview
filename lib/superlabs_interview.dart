@@ -22,7 +22,6 @@ export 'package:superlabs_interview/common/widgets/common_toast.dart';
 export 'package:superlabs_interview/common/widgets/common_widget.dart';
 export 'package:superlabs_interview/common/widgets/placeholder.dart';
 export 'package:superlabs_interview/main.dart';
-export 'package:superlabs_interview/model/file_data_model.dart';
 export 'package:superlabs_interview/model/filter_state.dart';
 export 'package:superlabs_interview/model/price_model.dart';
 export 'package:superlabs_interview/model/search_product_res.dart';

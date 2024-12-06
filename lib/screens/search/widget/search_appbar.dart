@@ -38,8 +38,12 @@ class SearchAppbar extends StatelessWidget {
                     Expanded(
                       child: TextField(
                         controller: controller.searchFieldController,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           border: InputBorder.none,
+                          hintText: "Search",
+                          hintStyle: styleW500S16.copyWith(
+                            color: ColorRes.grey2,
+                          ),
                         ),
                         onChanged: (value) => controller.onSearchChange(),
                       ),

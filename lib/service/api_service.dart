@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'package:superlabs_interview/superlabs_interview.dart';
-import 'package:superlabs_interview/superlabs_interview_extra.dart';
 
 class ApiService {
   static Future<http.Response?> getApi({
@@ -102,50 +101,6 @@ class ApiService {
       }
       final response =
           await http.delete(Uri.parse(url), headers: header, body: body);
-      bool isExpired = await isTokenExpire(response);
-      if (!isExpired) {
-        return response;
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-    return null;
-  }
-
-  static Future<http.Response?> uploadFileWithDataApi({
-    required String url,
-    String type = "POST",
-    Map<String, String>? header,
-    Map<String, String>? body,
-    List<FileDataModel> fileData = const [],
-  }) async {
-    header ??= {};
-    body ??= {};
-    header.addAll(appHeader());
-    debugPrint("Url = $url");
-    debugPrint("Header = $header");
-    debugPrint("Body = $body");
-    debugPrint("fileData = $fileData");
-    try {
-      var request = http.MultipartRequest(type, Uri.parse(url));
-      request.fields.addAll(body);
-      request.headers.addAll(header);
-      for (FileDataModel element in fileData) {
-        if (element.filePath == null || element.keyName == null) {
-          continue;
-        }
-        request.files.add(
-          http.MultipartFile(
-            element.keyName ?? '',
-            File(element.filePath!).readAsBytes().asStream(),
-            File(element.filePath!).lengthSync(),
-          ),
-        );
-      }
-
-      final http.StreamedResponse streamedResponse = await request.send();
-      final response = await http.Response.fromStream(streamedResponse)
-          .timeout(const Duration(seconds: 120));
       bool isExpired = await isTokenExpire(response);
       if (!isExpired) {
         return response;

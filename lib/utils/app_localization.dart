@@ -17,5 +17,6 @@ class AppLocalization extends Translations {
     "price_range": "Price Range",
     "clear_all": "Clear All",
     "show_results": "Show Results",
+    "load_more": "Load more",
   };
 }

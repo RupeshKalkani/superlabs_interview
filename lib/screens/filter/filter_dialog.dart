@@ -24,53 +24,48 @@ class FilterDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: Constants.horizontalPadding,
-        ),
-        child: Material(
-          color: ColorRes.white,
-          borderRadius: BorderRadius.circular(10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              header(),
-              GetBuilder<FilterController>(
+    return Dialog(
+      backgroundColor: ColorRes.white,
+      insetPadding: EdgeInsets.symmetric(
+        horizontal: Constants.horizontalPadding,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          header(),
+          Flexible(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.ww,
+              ),
+              child: GetBuilder<FilterController>(
                 id: "loader",
                 builder: (controller) {
-                  return ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: 100.h * 0.65,
-                    ),
-                    child: SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10.ww,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          sortByCell(controller),
-                          divider(),
-                          ratingCell(controller),
-                          divider(),
-                          brandCell(controller),
-                          divider(),
-                          attributeCell(controller),
-                          divider(),
-                          priceRangeCell(controller),
-                          divider(),
-                          filterChipCell(controller),
-                          submitButtons(controller),
-                        ],
-                      ),
-                    ),
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      sortByCell(controller),
+                      divider(),
+                      ratingCell(controller),
+                      divider(),
+                      brandCell(controller),
+                      divider(),
+                      attributeCell(controller),
+                      divider(),
+                      priceRangeCell(controller),
+                      divider(),
+                      filterChipCell(controller),
+                      submitButtons(controller),
+                    ],
                   );
                 },
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -6,23 +6,19 @@ class FilterInfoCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Constants.horizontalPadding,
-      ),
-      child: GetBuilder<SearchProductController>(
-        id: "loader",
-        builder: (controller) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              filterChipCell(controller),
-              searchData(controller),
-            ],
-          );
-        },
-      ),
+    return GetBuilder<SearchProductController>(
+      id: "loader",
+      builder: (controller) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            filterChipCell(controller),
+            searchData(controller),
+            SizedBox(height: 10.hh),
+          ],
+        );
+      },
     );
   }
 

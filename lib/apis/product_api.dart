@@ -24,8 +24,6 @@ class ProductApi {
       final Map<String, dynamic> queryParams = {
         "q": query,
         "brands": brands.map((e) => e.handle ?? '').join(','),
-        // "categories": data,
-        // "collections": data,
         "attributes": attributeMap.isEmpty ? null : jsonEncode(attributeMap),
         "minPrice": minPrice?.toString(),
         "maxPrice": maxPrice?.toString(),

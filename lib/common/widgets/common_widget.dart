@@ -308,23 +308,5 @@ class AppRatingBar extends StatelessWidget {
       isHalfAllowed: true,
       size: 17,
     );
-    return SizedBox(
-      height: 20,
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: 5,
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.zero,
-        itemBuilder: (con, index) {
-          return Icon(
-            Icons.star,
-            size: 20,
-            color:
-                rating >= (index + 1) ? ColorRes.primaryColor : ColorRes.grey4,
-          );
-        },
-      ),
-    );
   }
 }

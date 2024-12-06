@@ -297,6 +297,7 @@ class Product {
   double? averageRating;
   int? priceStart;
   dynamic priceEnd;
+  bool isFavorite;
 
   Product({
     this.id,
@@ -335,6 +336,7 @@ class Product {
     this.averageRating,
     this.priceStart,
     this.priceEnd,
+    this.isFavorite = false,
   });
 
   Product copyWith({
@@ -374,6 +376,7 @@ class Product {
     double? averageRating,
     int? priceStart,
     dynamic priceEnd,
+    bool? isFavorite,
   }) =>
       Product(
         id: id ?? this.id,
@@ -414,6 +417,7 @@ class Product {
         averageRating: averageRating ?? this.averageRating,
         priceStart: priceStart ?? this.priceStart,
         priceEnd: priceEnd ?? this.priceEnd,
+        isFavorite: isFavorite ?? this.isFavorite,
       );
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(

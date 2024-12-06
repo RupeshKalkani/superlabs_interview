@@ -18,6 +18,7 @@ class DynamicHeightGridView extends StatelessWidget {
     this.shrinkWrap = false,
     this.padding,
     this.physics,
+    this.firstWidget,
     this.lastWidget,
   });
 
@@ -32,6 +33,7 @@ class DynamicHeightGridView extends StatelessWidget {
   final ScrollController? controller;
   final bool shrinkWrap;
   final EdgeInsetsGeometry? padding;
+  final Widget? firstWidget;
   final Widget? lastWidget;
 
   int columnLength() {
@@ -50,7 +52,13 @@ class DynamicHeightGridView extends StatelessWidget {
       padding: padding,
       physics: physics,
       itemBuilder: (ctx, columnIndex) {
-        if(lastWidget != null && columnIndex == columnLength()){
+        if (firstWidget != null) {
+          if (columnIndex == 0) {
+            return firstWidget;
+          }
+          columnIndex--;
+        }
+        if (lastWidget != null && columnIndex == columnLength()) {
           return lastWidget;
         }
         return _GridRow(
@@ -63,7 +71,9 @@ class DynamicHeightGridView extends StatelessWidget {
           crossAxisAlignment: rowCrossAxisAlignment,
         );
       },
-      itemCount: columnLength() + (lastWidget != null ? 1 : 0),
+      itemCount: columnLength() +
+          (firstWidget != null ? 1 : 0) +
+          (lastWidget != null ? 1 : 0),
     );
   }
 }

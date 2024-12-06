@@ -6,7 +6,8 @@ void showErrorMsg(String msg, {BuildContext? context}) {
   debugPrint("Error: $msg");
 }
 
-Future<void> showCatchToast(String msg,dynamic exception, StackTrace? stack) async {
+Future<void> showCatchToast(
+    String msg, dynamic exception, StackTrace? stack) async {
   bool isInternetOn = false;
   try {
     final result = await InternetAddress.lookup('example.com');
